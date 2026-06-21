@@ -1,0 +1,11 @@
+project_id = "your-project-ref"
+
+[functions.seed-demo-accounts]
+verify_jwt = false
+
+[functions.hostaway-webhook]
+verify_jwt = false
+
+# send-sms and notify-unassigned-jobs default to verify_jwt = true.
+# Frontend invokes send-sms with the user's JWT; pg_cron invokes
+# notify-unassigned-jobs with the service_role key as Bearer.

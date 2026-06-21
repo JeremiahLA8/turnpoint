@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================================
+   Turnpoint — "Editorial Hospitality" design language.
+   Warm ivory paper, ink-charcoal text, a single deep-clay signature accent,
+   refined sand neutrals, a serif display face (Fraunces) for headlines paired
+   with a clean grotesque (Inter Tight) for body and mono (JetBrains) for the
+   editorial labels. Hairline borders, generous air, minimal shadow.
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --background: 40 30% 96%;
+    --foreground: 24 14% 13%;
+
+    --card: 40 38% 98%;
+    --card-foreground: 24 14% 13%;
+
+    --popover: 40 38% 98%;
+    --popover-foreground: 24 14% 13%;
+
+    --primary: 12 48% 42%;
+    --primary-foreground: 40 33% 97%;
+
+    --secondary: 36 24% 90%;
+    --secondary-foreground: 24 14% 16%;
+
+    --muted: 36 22% 91%;
+    --muted-foreground: 28 8% 40%;
+
+    --accent: 36 28% 87%;
+    --accent-foreground: 24 14% 14%;
+
+    --success: 152 36% 34%;
+    --success-foreground: 40 33% 97%;
+
+    --warning: 32 64% 46%;
+    --warning-foreground: 40 33% 97%;
+
+    --destructive: 6 56% 46%;
+    --destructive-foreground: 40 33% 97%;
+
+    --border: 24 14% 13% / 0.10;
+    --input: 24 14% 13% / 0.16;
+    --ring: 12 48% 42%;
+
+    --radius: 0.625rem;
+
+    --sidebar-background: 40 30% 93%;
+    --sidebar-foreground: 24 12% 22%;
+    --sidebar-primary: 12 48% 42%;
+    --sidebar-primary-foreground: 40 33% 97%;
+    --sidebar-accent: 36 26% 86%;
+    --sidebar-accent-foreground: 24 14% 14%;
+    --sidebar-border: 24 14% 13% / 0.08;
+    --sidebar-ring: 12 48% 42%;
+  }
+
+  .dark {
+    --background: 24 12% 9%;
+    --foreground: 40 30% 94%;
+    --card: 24 11% 12%;
+    --card-foreground: 40 30% 94%;
+    --popover: 24 11% 12%;
+    --popover-foreground: 40 30% 94%;
+    --primary: 14 54% 53%;
+    --primary-foreground: 24 12% 9%;
+    --secondary: 24 8% 18%;
+    --secondary-foreground: 40 30% 94%;
+    --muted: 24 8% 18%;
+    --muted-foreground: 36 10% 62%;
+    --accent: 24 8% 22%;
+    --accent-foreground: 40 30% 94%;
+    --success: 152 36% 44%;
+    --success-foreground: 24 12% 9%;
+    --warning: 32 64% 52%;
+    --warning-foreground: 24 12% 9%;
+    --destructive: 6 56% 50%;
+    --destructive-foreground: 40 30% 94%;
+    --border: 40 30% 94% / 0.10;
+    --input: 40 30% 94% / 0.16;
+    --ring: 14 54% 53%;
+
+    --sidebar-background: 24 12% 11%;
+    --sidebar-foreground: 40 26% 82%;
+    --sidebar-primary: 14 54% 53%;
+    --sidebar-primary-foreground: 24 12% 9%;
+    --sidebar-accent: 24 8% 20%;
+    --sidebar-accent-foreground: 40 30% 94%;
+    --sidebar-border: 40 30% 94% / 0.08;
+    --sidebar-ring: 14 54% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    font-feature-settings: 'ss01', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    width: 100%;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  /* Fraunces is set as font-family by the Tailwind `font-display` utility; this
+     just tunes the optical/letter treatment for big editorial headlines. */
+  .font-display {
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+  }
+}
+
+/* ============================================================================
+   Print — used by the Owner report (src/pages/OwnerReport.tsx).
+   Isolate `.print-area` so a manager's browser "Save as PDF" produces a clean
+   owner-facing document: app chrome (sidebar, header, `.no-print` controls)
+   is hidden, and the report fills the page.
+   ============================================================================ */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+  .print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding: 0;
+  }
+  .no-print {
+    display: none !important;
+  }
+  /* Keep each turn card whole across page breaks. */
+  .break-inside-avoid {
+    break-inside: avoid;
+  }
+}
